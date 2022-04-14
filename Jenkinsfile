@@ -1,21 +1,18 @@
 node{
-    def mvnHome
- 
-   stage('SetEnv') { 
-      git 'https://github.com/sneha0302/java-reachability-playground.git'
-      mvnHome = tool 'MAVEN_HOME'
-	   
-   }
-   
-   stage('CompileandPackage') {
-      withEnv(["MVN_HOME=$mvnHome"]) {
-            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean compile/)
-         }
-      
-   }
-   stage('Snyk'){
-        snykSecurity failOnIssues: true, organisation: 'b398e91b-bba0-44d5-bd7a-d72d389e5cec', snykInstallation: 'SnykSec', snykTokenId: 'snykKey'
-       
-   }
+
+
+stage('SetEnv') {
+checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/charankk21/SCA_Demo_Repo.git']]])
+
+}
+
+
+
+stage('Snyk'){
+snykSecurity failOnIssues: false, organisation: '0fc86b5d-38a2-4a8f-9f5e-90b2c2dec1b1', snykInstallation: 'snykKey', snykTokenId: 'CK_SNYK_TOKEN'
+
+}
+
+
 
 }
