@@ -1,7 +1,26 @@
 pipeline{
     agent any
     stages{
-	stage('SCA-->Snyk') {
+	stage('Pre-Commit--> Trufflehog'){
+            agent {label 'linagent'}
+	        options {
+                skipDefaultCheckout()
+                }
+			steps{
+				sh 'echo hello'
+				sh 'docker pull gesellix/trufflehog'
+				sh 'docker run gesellix/trufflehog --json --regex https://github.com/charankk21/SCA_Demo_Repo.git > result'
+				sh 'cat result'
+              }
+        }
+stage ('DAST-->ZAP')
+{
+	agent any
+    steps{
+         bat 'java -jar C:\\Program Files\\OWASP\\Zed Attack Proxy\\zap-2.10.0.jar -quickurl http://demo.testfire.net -quickout C:\\result_1.html -quickprogress -cmd'
+    }
+}
+stage('SCA-->Snyk') {
             agent any
             steps{
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/charankk21/SCA_Demo_Repo.git']]])
