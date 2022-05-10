@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-stage('SCA-->Snyk') {
+	stage('SCA-->Snyk') {
             agent any
             steps{
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/charankk21/SCA_Demo_Repo.git']]])
