@@ -5,7 +5,7 @@ pipeline{
             agent any
             steps{
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/charankk21/SCA_Demo_Repo.git']]])
-				snykSecurity failOnIssues: false, organisation: '0fc86b5d-38a2-4a8f-9f5e-90b2c2dec1b1', snykInstallation: 'snykKey', snykTokenId: 'CK_SNYK_TOKEN'
+				snykSecurity failOnIssues: false, organisation: '5fa845f1-b5bc-4ae1-8c00-dffe4ace79f7', snykInstallation: 'snykKey', snykTokenId: 'CK_SNYK_TOKEN'
                 }
         }
 stage('snyk-jira') {
@@ -13,7 +13,7 @@ stage('snyk-jira') {
 			script{
 				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') 
 				{
-					bat 'C:\\Users\\Administrator\\Downloads\\snyk-jira-sync-win.exe --orgID=ea0871ca-05d5-4005-b34a-59f732ba9bb3 --token=CK_SNYK_TOKEN --jiraProjectKey=SNYK --configFile=true --jiraTicketType=Task --projectID=1e30db1e-9896-43b7-b9ad-df71bcf6ac7c'
+					bat 'C:\\Users\\Administrator\\Downloads\\snyk-jira-sync-win.exe --orgID=5fa845f1-b5bc-4ae1-8c00-dffe4ace79f7 --token=CK_SNYK_TOKEN --jiraProjectKey=SNYK --configFile=true --jiraTicketType=Task --projectID=1e30db1e-9896-43b7-b9ad-df71bcf6ac7c'
 					bat 'exit 0'
 				}
 			}
