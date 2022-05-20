@@ -13,7 +13,7 @@ stage('snyk-jira') {
 			script{
 				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') 
 				{
-					bat 'C:\\Users\\Administrator\\Downloads\\snyk-jira-sync-win.exe --orgID=ea0871ca-05d5-4005-b34a-59f732ba9bb3 --token=CK_SNYK_TOKEN --jiraProjectKey=SNYK --configFile=true --jiraTicketType=Task --projectID=9a711646-32f4-4a04-9eba-0579546082f0'
+					bat 'C:\\Users\\Administrator\\Downloads\\snyk-jira-sync-win.exe --orgID=ea0871ca-05d5-4005-b34a-59f732ba9bb3 --token=CK_SNYK_TOKEN --jiraProjectKey=SNYK --configFile=true --jiraTicketType=Task --projectID=1e30db1e-9896-43b7-b9ad-df71bcf6ac7c'
 					bat 'exit 0'
 				}
 			}
